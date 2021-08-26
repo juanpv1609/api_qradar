@@ -36,7 +36,6 @@
 
                                     v-model="form.password"
                                     required
-                                    type="password"
                                     outlined
                                     dense
                                     color="orange darken-4"

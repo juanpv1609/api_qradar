@@ -6,6 +6,7 @@ import axios from 'axios';
 import createPersistedState from 'vuex-persistedstate';
 axios.defaults.withCredentials = true;
 //axios.defaults.baseURL = 'http://127.0.0.1:8000';
+//axios.defaults.baseURL = process.env.MIX_APP_URL;
 axios.defaults.baseURL = process.env.MIX_APP_URL;
 Vue.use(VueAxios, axios);
 Vue.use(Vuex);
@@ -41,7 +42,7 @@ const store = new Vuex.Store({
             return dispatch("getUser");
         },
        async getUser({commit}){
-        await axios.get('/api/user').then(res => {
+           await axios.get('/api/actualUser').then(res => {
                 //console.log(res.data);
                 commit("SET_USER",res.data);
                 commit('SET_LAYOUT', 'main-layout');

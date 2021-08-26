@@ -1,4 +1,4 @@
-/**
+ /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
@@ -24,7 +24,7 @@ import InputTag from 'vue-input-tag'
 import Toasted from 'vue-toasted';
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
-
+import HighchartsVue from 'highcharts-vue';
 let options = {
     theme: 'bubble',
     duration: 2000,
@@ -49,7 +49,7 @@ Vue.use(VCalendar, {
 });
 Vue.component('input-tag', InputTag);
 
-
+Vue.use(HighchartsVue)
 
 const app = new Vue({
     el: '#app',

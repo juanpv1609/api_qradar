@@ -41,15 +41,15 @@
                     <template v-slot:item="row">
                         <tr>
                             <td>{{row.item.id}}</td>
-                            <td>{{row.item.name}}</td>
+                            <td>{{row.item.username}}</td>
                             <td>{{row.item.email}}</td>
-                            <td>{{(row.item.role==2) ? 'Administrador' : 'Consulta'}}</td>
-                            <td>{{row.item.created_at}}</td>
+                            <td>{{row.item.rol.description}}</td>
+                            <td>{{row.item.company.description}}</td>
                             <td>
                                 <v-btn  icon color="primary" @click="editUser(row.item)">
                                     <v-icon dark>mdi-pencil</v-icon>
                                     </v-btn>
-                                    <v-btn :disabled="row.item.role==2"  icon color="error" @click="deleteUser(row.item)">
+                                    <v-btn :disabled="row.item.rol==1"  icon color="error" @click="deleteUser(row.item)">
                                     <v-icon dark>mdi-delete</v-icon>
                                 </v-btn>
                             </td>
@@ -68,17 +68,14 @@
                                 <span class="headline">{{ titleForm }}</span>
                             </v-card-title>
                             <v-card-text>
-                                <v-container>
-                                    <v-row>
+                                    <v-row dense>
                                         <v-col cols="12">
                                             <v-text-field
-                                                v-model="usuario.name"
-                                                label="Nombre y Apellido*"
+                                                v-model="usuario.username"
+                                                label="Nombre de usuario*"
                                                 required
                                             ></v-text-field>
                                         </v-col>
-                                    </v-row>
-                                    <v-row>
                                         <v-col cols="12">
 
                                             <v-text-field
@@ -87,25 +84,33 @@
                                                 required
                                             ></v-text-field>
                                         </v-col>
-                                    </v-row>
-                                    <v-row>
                                         <v-col cols="12">
-                                            <v-select :items="roles" v-model="usuario.role"
+                                            <v-select :items="roles" v-model="usuario.rol_id"
                                                 label="Rol">
                                             </v-select>
                                         </v-col>
-                                    </v-row>
-                                    <v-row v-if="!update">
                                         <v-col cols="12">
+                                            <v-autocomplete
+                                                        :items="companies"
+                                                        clearable
+                                                        item-text="description"
+                                                        item-value="id"
+                                                        v-model="usuario.company_id"
+                                                        label="Seleccione una compañia"
+                                                        :rules="rules.company_id"
+                                                        dense
+                                                    ></v-autocomplete>
+                                        </v-col>
+                                        <v-col cols="12" v-if="!update">
                                             <v-text-field
                                                 v-model="usuario.password"
                                                 label="Password*"
                                                 required
-                                                disabled
+                                                type="password"
+
                                             ></v-text-field>
                                         </v-col>
                                     </v-row>
-                                </v-container>
                                 <small>*indicates required field</small>
                             </v-card-text>
                             <v-card-actions>
@@ -148,20 +153,24 @@ import moment from 'moment';
         data() {
             return {
                 usuarios: [],
+                companies:[],
                 dialog: false,
                 update: false,
                 usuario: {},
                 loading: true,
                 titleForm: null,
+                rules:{
+                        company_id: [ v => !!v || 'Este campo es requerido!' ],
+                },
                 search: "",
-                
+
                 roles:[
                     {
-                        value:1,
-                        text: 'Consulta'
+                        value:2,
+                        text: 'Cliente'
                     },
                     {
-                        value:2,
+                        value:1,
                         text: 'Adminstrador'
                     }
                 ],
@@ -172,32 +181,41 @@ import moment from 'moment';
                     // filterable: false,
                     value: "id"
                 },
-                { text: "Nombre", value: "nombre" },
+                { text: "Username", value: "username" },
                 { text: "Email", value: "email" },
-                { text: "Rol", value: "role" },
-                { text: "Fecha creacion", value: "created_at" },
+                { text: "Rol", value: "rol" },
+                { text: "Compañia", value: "company" },
+                // { text: "Fecha creacion", value: "created_at" },
                 { text: "Acciones", value: "controls", sortable: false }
             ]
 
             }
         },
         created() {
-            this.axios
+            this.getData();
+        },
+        methods: {
+            getData(){
+                this.axios
                 .get('/api/usuarios-all')
                 .then(response => {
                     this.usuarios = response.data;
-                    for (const item of this.usuarios) {
-                        item.created_at=moment(item.created_at).format('DD/MM/YYYY hh:mm')
-                    }
+                    console.log(response.data);
                     this.loading = false;
                 });
-        },
-        methods: {
+                this.axios
+                .get('/api/company')
+                .then(response => {
+                    this.companies = response.data;
+                    console.log(response.data);
+                    this.loading = false;
+                });
+            },
             addUser() {
 
                 this.titleForm = "Nuevo Usuario";
                 this.usuario = {};
-                this.usuario.password='R@dical2021';
+                //this.usuario.password='R@dical2021';
                 this.update = false;
                 this.dialog = true;
             },
@@ -206,28 +224,20 @@ import moment from 'moment';
                 this.titleForm = "Editar Usuario";
                 this.update = true;
                 this.usuario.id = el.id;
-                this.usuario.name = el.name;
+                this.usuario.username = el.username;
                 this.usuario.email = el.email;
-                this.usuario.role = el.role;
-                this.usuario.created_at = el.created_at;
+                this.usuario.rol_id = el.rol.id;
+                this.usuario.company_id = el.company.id;
                 this.dialog = true;
             },
             createUser() {
                 this.loading = true;
                 this.axios
                     .post('/api/usuarios', this.usuario)
-                    .then(response => {
+                    .then(() => {
                         this.dialog = false;
                         this.loading = false;
-                        this.axios
-                            .get('/api/usuarios-all')
-                            .then(response => {
-                                this.usuarios = response.data;
-                                for (const item of this.usuarios) {
-                                    item.created_at=moment(item.created_at).format('DD/MM/YYYY hh:mm')
-                                }
-
-                            });
+                        this.getData();
                          })
                     .catch(err => console.log(err))
                     .finally(() => this.loading = false)
@@ -236,17 +246,10 @@ import moment from 'moment';
                 this.loading = true;
                 this.axios
                     .patch(`/api/usuarios/${this.usuario.id}`, this.usuario)
-                    .then((res) => {
+                    .then(() => {
                         this.dialog = false;
                         this.loading = false;
-                        this.axios
-                            .get('/api/usuarios-all')
-                            .then(response => {
-                                this.usuarios = response.data;
-                                for (const item of this.usuarios) {
-                                    item.created_at=moment(item.created_at).format('DD/MM/YYYY hh:mm')
-                                }
-                            });
+                        this.getData();
                     });
             },
             deleteUser(el) {

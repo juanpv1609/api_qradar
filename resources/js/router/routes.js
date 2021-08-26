@@ -5,11 +5,11 @@ import Login from "../components/auth/Login.vue";
 import Home from "../components/Home.vue";
 
 import AllUsuarios from "../components/usuario/AllUsuarios.vue";
-import Actividad from "../components/actividad/Actividad.vue";
-import ActividadNew from "../components/actividad/ActividadNew.vue";
+import Ofensas from "../components/ofensas/List.vue";
+import Assets from "../components/ofensas/Assets.vue";
+import OfensasOverview from "../components/ofensas/Overview.vue";
+import Test from "../components/ofensas/Test.vue";
 //REPORTES
-
-import ReporteResumen from "../components/reportes/ReporteResumen.vue";
 
 const router = new VueRouter({
     mode: "history",
@@ -48,31 +48,37 @@ const router = new VueRouter({
             }
         },
         {
-            name: "actividad",
-            path: "/actividad",
-            component: Actividad,
+            name: "test",
+            path: "/test",
+            component: Test,
             meta: {
                 requiresAuth: true
             }
         },
         {
-            name: "actividad-new",
-            path: "/actividad-new",
-            component: ActividadNew,
+            path: "/ofensas",
+            name: "Ofensas",
+            component: Ofensas,
             meta: {
                 requiresAuth: true
             }
         },
-        //REPORTES
-
         {
-            name: "reporte-resumen",
-            path: "/reporte-resumen",
-            component: ReporteResumen,
+            path: "/ofensas-overview",
+            name: "Ofensas-overview",
+            component: OfensasOverview,
             meta: {
-                requiresAuth: false
+                requiresAuth: true
             }
-        }
+        },
+        {
+            path: "/assets",
+            name: "assets",
+            component: Assets,
+            meta: {
+                requiresAuth: true
+            }
+        },
     ]
 });
 

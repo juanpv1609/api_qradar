@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Rol;
+use App\Models\Company;
 use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
@@ -19,13 +21,15 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name',
+        'username',
         'email',
-        'role',
+        'rol_id',
+        'company_id',
         'password',
+        'is_enabled',
         'is_deleted'
     ];
-
+public $timestamps = false;
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -33,7 +37,6 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        'remember_token',
     ];
 
     /**
@@ -41,9 +44,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+
     /* public function getJWTIdentifier()
     {
         return $this->getKey();
@@ -53,4 +54,11 @@ class User extends Authenticatable
     {
         return [];
     } */
+    public function company(){
+        return $this->belongsTo(Company::class, 'company_id', 'id');
+    }
+    public function rol(){
+        return $this->belongsTo(Rol::class, 'rol_id', 'id');
+    }
+
 }

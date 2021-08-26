@@ -14,31 +14,32 @@
                                 src="../img/nuevologo-radical.png"
                                 alt="Logo"
                             ></v-img>
+                            <v-divider></v-divider>
                             <h2 class="text-center">Iniciar Sesión</h2>
-                            <v-col cols="12">
+                            <v-col cols="12" dense>
                                 <v-text-field
-                                    label="Correo electrónico*"
-                                    rounded
+                                    label="Usuario*"
+
                                     v-model="form.email"
                                     required
                                     type="email"
                                     :rules="emailRules"
-                                    prepend-inner-icon="mdi-email"
+                                    prepend-inner-icon="mdi-account"
                                     outlined
                                     dense
-                                    color="primary"
+                                    color="orange darken-4"
                                 ></v-text-field>
                             </v-col>
-                            <v-col cols="12">
+                            <v-col cols="12" dense>
                                 <v-text-field
                                     label="Contraseña*"
-                                    rounded
+
                                     v-model="form.password"
                                     required
                                     type="password"
                                     outlined
                                     dense
-                                    color="primary"
+                                    color="orange darken-4"
                                     :rules="passwordRules"
                                     @keyup.enter="login"
                                     :type="show ? 'text' : 'password'"
@@ -55,17 +56,18 @@
                                 type="error"
                                 >{{ error }}</v-alert
                             >
-                        </v-card-text>
-                        <v-card-actions>
-                            <v-btn
+                            <v-col cols="12">
+                                <v-btn
                                 block
-                                color="primary"
+                                dark
+                                color="orange darken-4"
                                 depressed
                                 @click="login"
                             >
                                 Enviar
                             </v-btn>
-                        </v-card-actions>
+                            </v-col>
+                        </v-card-text>
                     </v-card>
                 </v-form>
             </v-col>
@@ -86,8 +88,8 @@ export default {
             has_error: false,
             error: null,
             emailRules: [
-                v => !!v || "E-mail is required",
-                v => /.+@.+\..+/.test(v) || "E-mail must be valid"
+                v => !!v || "Username is required",
+                //v => /.+@.+\..+/.test(v) || "E-mail must be valid"
             ],
             passwordRules: [
                 v => !!v || "Password is required"
@@ -100,6 +102,7 @@ export default {
     },
     methods: {
         login() {
+            this.axios.defaults.baseURL = process.env.MIX_APP_URL;
             if (this.$refs.form.validate()) {
                 this.loading = true;
                 this.$store
@@ -108,7 +111,7 @@ export default {
                         this.loading = false;
                         //this.$router.push({ path: this.redirect || "/contratos" }, () => { }, () => { });
                         this.$router
-                            .push({ name: "actividad-new" })
+                            .push({ name: "Ofensas-overview" })
                             .then(() => {
                                 this.$store.commit("SET_LAYOUT", "main-layout");
                             })

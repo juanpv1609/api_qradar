@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -38,6 +41,21 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+public function login(Request $request)
+{
+    $decrypted = $request->input('password');
+    $user      = User::where('username', $request->input('email'))->first();
+
+    if ($user) {
+        if (Crypt::decryptString($user->password) == $decrypted) {
+            Auth::login($user);
+
+            return $this->sendLoginResponse($request);
+        }
+    }
+
+    return $this->sendFailedLoginResponse($request);
+}
     protected function authenticated(Request $request,$user){
         return response()->json($user);
 

@@ -11,9 +11,7 @@
         <v-footer dense app fixed flat padless
         >
         <v-col cols="4" class="text-left">
-                <router-link to="/"> Acerca de</router-link>
-
-            </v-col>
+                QRadar RestAPI</v-col>
             <v-col
             class="text-center"
             cols="4"

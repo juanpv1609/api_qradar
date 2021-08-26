@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Crypt;
 
 class UserController extends Controller
 {
     public function index()
     {
         $cond=[ 'is_deleted' => 0];
-         $usuarios = User::where($cond)->orderBy('name')->get()->toArray();
+         $usuarios = User::with('company', 'rol')->where($cond)->orderBy('username')->get()->toArray();
 
         return ($usuarios);
 
@@ -20,10 +21,18 @@ class UserController extends Controller
     {
         $cond=['is_deleted' => 0];
 
-        $usuarios = User::where($cond)->orderBy('name')->get()->toArray();
+        $usuarios = User::with('company', 'rol')->where($cond)->orderBy('username')->get()->toArray();
 
         return ($usuarios);
 
+    }
+    public function actualUser()
+    {
+
+        $user = User::with('company', 'rol')->where('id', auth()->user()->id)->First();
+
+        //return DataTables::eloquent($users)->make(true);
+        return $user;
     }
     public function store(Request $request)
     {
@@ -32,10 +41,11 @@ class UserController extends Controller
         // return view('cliente.index')->with('clientes', $clientes);
 
         $user = new User([
-            'name' => $request->input('name'),
+            'username' => $request->input('username'),
             'email' => $request->input('email'),
-            'role' => $request->input('role'),
-            'password' => Hash::make($request->input('password')),
+            'rol_id' => $request->input('rol_id'),
+            'company_id' => $request->input('company_id'),
+            'password' => Crypt::encryptString($request->input('password')),
         ]);
         $user->save();
 
@@ -46,8 +56,8 @@ class UserController extends Controller
     {
 
         $user = User::where('id',$request->user)->first();
-        if (Hash::check( $request->old_password, $user->password)) {
-            $user->password = Hash::make($request->new_password);
+        if (Crypt::decryptString( $user->password)==$request->old_password) {
+            $user->password = Crypt::encryptString($request->new_password);
             $user->save();
             # code...
             return response()->json('user created!');

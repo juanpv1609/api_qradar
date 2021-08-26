@@ -29,7 +29,7 @@ class UserController extends Controller
     public function actualUser()
     {
 
-        $user = User::with('company', 'rol')->where('id', auth()->user()->id)->First();
+        $user = User::with('company', 'rol')->where('id', auth()->user()->id)->First()->toArray();
 
         //return DataTables::eloquent($users)->make(true);
         return $user;

@@ -27,8 +27,8 @@
                 </v-btn> -->
 
                 <v-spacer></v-spacer>
-                <span >{{ $store.state.user.company.description }}</span>
-                
+                <span >{{ ($store.state.user.company) ? $store.state.user.company.description : 'NA' }}</span>
+
                 <v-btn icon color="error" @click="logout">
                     <v-icon >mdi-logout</v-icon>
                 </v-btn>

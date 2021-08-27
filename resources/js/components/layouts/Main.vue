@@ -27,9 +27,12 @@
                 </v-btn> -->
 
                 <v-spacer></v-spacer>
-                <span >{{ ($store.state.user.company) ? $store.state.user.company.description : 'NA' }}</span>
+                <v-chip
+                class="ma-2" ><v-icon left>
+        mdi-account-circle-outline
+      </v-icon> {{ ($store.state.user.company) ? $store.state.user.company.description : 'NA' }}</v-chip>
 
-                <v-btn icon color="error" @click="logout">
+                <v-btn icon  @click="logout">
                     <v-icon >mdi-logout</v-icon>
                 </v-btn>
             </v-app-bar>

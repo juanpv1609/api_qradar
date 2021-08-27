@@ -1,13 +1,16 @@
 <template>
   <div>
 
-    <v-row>
-            <v-col v-for="regla in reglas" v-bind:key="regla.qid" cols="3">
+    <v-row dense>
+            <v-col v-for="regla in reglas" v-bind:key="regla.qid" cols="3" dense>
+                 <v-hover v-slot="{ hover }">
                 <v-card
                 class="mx-auto"
                 max-width="344"
                 shaped
-                :color="(regla.ofensas>0) ? 'red' : 'green'"
+                :color="(regla.ofensas>0) ? 'red lighten-1' : 'green darken-2'"
+                :elevation="hover ? 12 : 2"
+              :class="{ 'on-hover': hover }"
 
             >
                 <v-list-item
@@ -33,12 +36,13 @@
 
                 </v-card-actions>
             </v-card>
+                 </v-hover>
             </v-col>
 
 
     </v-row>
-    <v-row v-show="chartOptions.series.length>0">
-       <v-col cols="12">
+    <v-row v-show="chartOptions.series.length>0" dense>
+       <v-col cols="12" dense>
           <v-card>
        <v-card-text>
             <highcharts :options="chartOptions" ></highcharts>
@@ -84,6 +88,7 @@ export default {
 
 
 
+
      getReglas(){
          this.axios
                 .get('/api/rules')
@@ -91,14 +96,11 @@ export default {
                     this.reglas = response.data;
                     console.log(response.data);
                     this.reglas.forEach(element => {
-                        //console.log(element.description);
                         element.loading=true;
                         this.axios
-                                //.get(`siem/offenses?filter=status=OPEN and rules contains(id=${this.CELEPSA[0].id})`,this.configHeaders)
                                 .get(`/api/offenses-rule/${element.qid}`)
                                 .then(resp => {
                                     console.log(resp.data.length);
-                                //this.regla_136124=resp.data;
                                     element.ofensas = resp.data.length;
                                     element.loading=false;
 

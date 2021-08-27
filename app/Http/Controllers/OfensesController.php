@@ -71,6 +71,7 @@ class OfensesController extends Controller
 
 
     }
+
     public function offensesRule($qid){
         $user = User::with('company', 'rol')->where('id', auth()->user()->id)->First();
 

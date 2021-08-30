@@ -324,15 +324,16 @@ export default {
             .get(`/api/top-logsources-events`)
             .then(response => {
                //this.regla_136124=response.data;
+
                //console.log(response.data);
                var aux = {  series:[]  };
                response.data.forEach(element => {
                   //var temp = [];
+                  element.log_sources = element.log_sources.filter(function(car) {
+                        return car.type_name !== 'EventCRE';
+                    });
                   for (let index = 0; index < element.log_sources.length; index++) {
-                     //const el = element.log_sources[index];
-                      if (element.log_sources[index].type_name==='EventCRE') {
-                        element.log_sources.splice(index,1)
-                     }
+
 
                   aux.series.push({name:`(${(element.log_sources[index].type_name)}) ${(element.log_sources[index].name)}`,data:[element.event_count]})
                   }
@@ -414,7 +415,7 @@ export default {
             .get(`/api/local-destination`)
             .then(response => {
                //this.regla_136124=response.data;
-               console.log(response.data);
+               //console.log(response.data);
                this.LocalDestinationItems=response.data;
                this.LocalDestinationItems.forEach(element => {
                   element.last_event_flow_seen=moment(element.last_event_flow_seen).format("DD/MM/YYYY hh:mm")

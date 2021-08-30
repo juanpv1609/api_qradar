@@ -39,6 +39,7 @@ class OfensesController extends Controller
 
 
         //dd(Carbon::now()->timezone('America/Guayaquil')->valueOf());
+        //dd($response);
         return $response;
 
 

@@ -21,13 +21,22 @@ export default {
 
      }
   },
+  mounted() {
+      this.getData()
+
+  },
     created() {
 
     // this.creaChart();
-    this.topOffenseCategories();
+
 
   },
 methods:{
+    async getData(){
+        await this.topOffenseCategories();
+        //await this.mostRecentOffenses();
+        //wait this.creaChart();
+     },
     topOffenseCategories() {
         //this.loading=true;
          //this.axios.defaults.headers.common['Range'] = 'items=0-9';

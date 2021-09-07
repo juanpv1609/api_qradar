@@ -29,7 +29,7 @@ export default {
   },
 methods:{
     topOffenseCategories() {
-        this.loading=true;
+        //this.loading=true;
          //this.axios.defaults.headers.common['Range'] = 'items=0-9';
 
         this.axios
@@ -41,11 +41,11 @@ methods:{
                         var temp=[];
                     for (let index = 0; index < this.searches.length; index++) {
                         const element = this.searches[index];
-                         element.loading=true;
+                         //element.loading=true;
                         this.axios
                                 .get(`/api/busqueda/${element.search_id}`)
                                 .then(resp => {
-                                    element.loading=false;
+                                    //element.loading=false;
                                     console.log(resp.data.events);
                                         aux.id=index;
                                         aux = {
@@ -67,7 +67,7 @@ methods:{
                                             categories:[element.name]
                                         }
                                         aux.series.push({name:(e[element.name]) ? e[element.name] : 'N/A',data:[e[element.data]]})
-                                        
+
                                     });
                                 temp.push(aux)
                                 }).catch(err => console.log(err))

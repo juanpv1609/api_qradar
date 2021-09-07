@@ -85,4 +85,16 @@ class OfensesController extends Controller
 
 
     }
+    public function busqueda($search_id){
+        $user = User::with('company', 'rol')->where('id', auth()->user()->id)->First();
+
+        $host = env("API_QRADAR");
+        $response = Http::withOptions(['verify' => false])->withBasicAuth($user->username, Crypt::decryptString($user->password))->accept('application/json')
+                ->get($host.'ariel/searches/'.$search_id.'/results');
+
+
+        return ($response);
+
+
+    }
 }

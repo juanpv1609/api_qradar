@@ -72,7 +72,15 @@ export default {
         title: {
           text: 'Cantidad de Ofensas por caso de uso'
         },
-        series: [ ]
+        series: [ ],
+        yAxis:{
+               title:{
+                  text:'Ofensas'
+               }
+            },
+        xAxis:{
+                categories:['Caso de Uso']
+            },
       },
 
      }

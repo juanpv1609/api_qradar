@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\RulesController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\OfensesController;
+use App\Http\Controllers\SearchesController;
 use App\Http\Controllers\SendMailController;
 use App\Http\Controllers\Auth\LoginController;
 
@@ -45,6 +46,8 @@ Route::middleware('api')->group(function () {
     Route::resource('usuarios', UserController::class);
     Route::resource('company', CompanyController::class);
     Route::resource('rules', RulesController::class);
+    Route::resource('searches', SearchesController::class);
+
 
 
     Route::get('usuarios-all', [UserController::class,'indexAll']);
@@ -54,6 +57,8 @@ Route::middleware('api')->group(function () {
     Route::get('source-address', [OfensesController::class,'sourceAddress']);
     Route::get('local-destination', [OfensesController::class,'localDestination']);
     Route::get('offenses-rule/{qid}', [OfensesController::class,'offensesRule']);
+    Route::get('busqueda/{qid}', [OfensesController::class,'busqueda']);
+
 
 
 

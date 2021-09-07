@@ -8,7 +8,7 @@ import AllUsuarios from "../components/usuario/AllUsuarios.vue";
 import Ofensas from "../components/ofensas/List.vue";
 import Assets from "../components/ofensas/Assets.vue";
 import OfensasOverview from "../components/ofensas/Overview.vue";
-import Test from "../components/ofensas/Test.vue";
+import Extra from "../components/ofensas/Extra.vue";
 //REPORTES
 
 const router = new VueRouter({
@@ -48,9 +48,9 @@ const router = new VueRouter({
             }
         },
         {
-            name: "test",
-            path: "/test",
-            component: Test,
+            name: "extra",
+            path: "/extra",
+            component: Extra,
             meta: {
                 requiresAuth: true
             }

@@ -22,6 +22,9 @@
                 <v-btn text dark color="orange darken-4" link :to="'/ofensas-overview'">
                     Overview
                 </v-btn>
+                <v-btn text dark color="orange darken-4" link :to="'/extra'">
+                    Extra
+                </v-btn>
                 <!-- <v-btn text dark color="orange darken-4" link :to="'/assets'">
                     Assets
                 </v-btn> -->

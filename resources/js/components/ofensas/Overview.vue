@@ -191,6 +191,10 @@ export default {
                   text:'Ofensas'
                }
             }
+            ,
+            xAxis:{
+                categories:['Categories']
+            }
          },
          chartOptionsTopLogSource: {
             chart: {
@@ -204,6 +208,9 @@ export default {
                title:{
                   text:'Events'
                }
+            },
+            xAxis:{
+                categories:['Log Source']
             }
          },
          chartOptionsTopSourceAddress: {
@@ -218,6 +225,9 @@ export default {
                title:{
                   text:'Events'
                }
+            },
+            xAxis:{
+                categories:['IP Address']
             }
          },
          chartOptionsTopDestinationAddress: {
@@ -244,6 +254,9 @@ export default {
                title:{
                   text:'Events'
                }
+            },
+            xAxis:{
+                categories:['IP Address']
             }
          },
          //-----TABLAS --------

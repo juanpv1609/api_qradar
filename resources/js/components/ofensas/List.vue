@@ -19,6 +19,7 @@
                     <v-list-item-content>
                     <div class="text-overline mb-4 text--secondary">
                     {{ regla.description }}
+                    <v-chip x-small color="dark" dark label>{{ regla.it_ot }}</v-chip>
                     </div>
                     <v-list-item-title class="text-h1 mb-1">
                         <v-progress-linear
@@ -26,7 +27,7 @@
                             color="black" v-if="regla.loading"
                             class="display-4 text-center font-weight-bold"
                             ></v-progress-linear>
-                    <h1 v-else class="display-4 text-center font-weight-bold" >{{regla.ofensas}}</h1>
+                    <h1 v-else class="display-3 text-center font-weight-bold" >{{regla.ofensas}}</h1>
                     </v-list-item-title>
                     <v-list-item-subtitle></v-list-item-subtitle>
                     </v-list-item-content>

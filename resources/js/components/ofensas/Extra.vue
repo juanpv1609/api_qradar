@@ -55,7 +55,7 @@ methods:{
                                 .get(`/api/busqueda/${element.search_id}`)
                                 .then(resp => {
                                     //element.loading=false;
-                                    console.log(resp.data.events);
+                                    console.log(resp);
                                         aux.id=index;
                                         aux = {
                                             yAxis:{

@@ -94,8 +94,28 @@
                                 </v-col>
                                 </v-row>
                                 <v-row>
+                                    <v-card>
+                                            <v-card-title
+                                        >
+                                            Ofensas
+                                            <v-spacer></v-spacer>
+                                            <v-col cols="auto">
+                                                <v-text-field
+                                                v-model="searchObjetos"
+                                                append-icon="mdi-magnify"
+                                                label="Buscar"
+                                                single-line
+                                                hide-details
+                                                filled
+                                                rounded
+                                                dense
+                                            ></v-text-field>
+                                            </v-col>
+
+                                            </v-card-title>
+                                    <v-card-text>
                                     <v-data-table
-                                        dense
+
                                             :headers="headersObjetos"
                                             :items="objetos"
                                             :search="searchObjetos"
@@ -104,7 +124,12 @@
                                         <template v-slot:item="row">
                                             <tr>
                                                 <td>{{row.item.description}}</td>
-                                                 <td>{{row.item.categories}}</td>
+                                                 <!-- <td>{{row.item.categories}}</td> -->
+                                                 <td>
+                                                     <div v-for="cat in row.item.categories" v-bind:key="cat">
+                                                         <v-chip small>{{cat}}</v-chip>
+                                                         </div>
+                                                         </td>
                                                 <td>{{row.item.event_count}}</td>
                                                 <td>{{row.item.offense_source}}</td>
                                                 <td>{{row.item.magnitude}}</td>
@@ -112,6 +137,8 @@
                                             </tr>
                                         </template>
                                 </v-data-table>
+                                    </v-card-text>
+                                    </v-card>
                                 </v-row>
                     </v-card-text>
                 </v-card>

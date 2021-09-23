@@ -64,7 +64,7 @@
                         <v-btn
                             icon
                             dark
-                            @click="dialog = false"
+                            @click="this.cerrar()"
                         >
                             <v-icon>mdi-close</v-icon>
                         </v-btn>
@@ -74,7 +74,7 @@
                             <v-btn
                             dark
                             text
-                            @click="dialog = false"
+                            @click="this.cerrar()"
                             >
                             Cerrar
                             </v-btn>
@@ -234,15 +234,20 @@ export default {
         this.objeto.categories=el.categories;
         this.objeto.log_sources=el.log_sources;
         this.objeto.destination_networks=el.destination_networks;
-        var tempArray = []
-        tempArray.push({name:'Eventos',data:[(el.event_count)]})
-        tempArray.push({name:'Ofensas',data:[(el.ofensas_count)]})
-        tempArray.push({name:'Categorias',data:[(el.category_count)]})
-        tempArray.push({name:'LogSources',data:[(el.log_sources)]})
-        this.chartObjeto.series.push(tempArray)
+        this.objeto.elementos=el.elementos;
+
+        this.chartObjeto.series.push({name:'Eventos',data:[(el.event_count)]})
+        this.chartObjeto.series.push({name:'Ofensas',data:[(el.ofensas_count)]})
+        this.chartObjeto.series.push({name:'Categorias',data:[(el.category_count)]})
+        this.chartObjeto.series.push({name:'LogSources',data:[(el.log_sources)]})
 
          this.dialog=true;
 
+     },
+     cerrar(){
+         this.chartObjeto.series=[];
+         this.objeto={};
+         dialog = false;
      }
 
 

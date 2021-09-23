@@ -14,10 +14,10 @@
 
             >
                 <v-list-item
-
+                    @click="detalle(regla)"
                     >
                     <v-list-item-content>
-                    <div class="text-overline mb-4 text--secondary" link @click="detalle(regla)">
+                    <div class="text-overline mb-4 text--secondary"  >
                     {{ regla.description }}
                     <v-chip x-small color="dark" dark label>{{ regla.it_ot }}</v-chip>
                     </div>
@@ -135,6 +135,10 @@ export default {
                                 .then(resp => {
                                     console.log(resp.data);
                                     element.ofensas = resp.data.length;
+                                    resp.data.forEach(r => {
+                                        element.eventos+=r.event_count
+                                        element.categories+=r.category_count
+                                    })
                                     element.loading=false;
 
                                     this.chartOptions.series.push({name:element.description,data:[resp.data.length]})

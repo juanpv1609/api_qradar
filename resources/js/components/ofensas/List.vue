@@ -95,9 +95,6 @@ export default {
   },
   methods:{
 
-
-
-
      getReglas(){
          this.axios
                 .get('/api/rules')
@@ -109,7 +106,7 @@ export default {
                         this.axios
                                 .get(`/api/offenses-rule/${element.qid}`)
                                 .then(resp => {
-                                    console.log(resp.data.length);
+                                    console.log(resp.data);
                                     element.ofensas = resp.data.length;
                                     element.loading=false;
 

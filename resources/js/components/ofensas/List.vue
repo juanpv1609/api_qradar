@@ -44,18 +44,19 @@
     </v-card-text>
     <v-fab-transition>
                     <v-btn
-                        color="primary"
+                        color="dark"
                         fab
-                        large
+                        small
                         dark
-                        bottom
-                        left
+                        top
+                        right
+                        @click="getReglas()"
                     >
                         <v-icon>mdi-reload</v-icon>
                     </v-btn>
                     </v-fab-transition>
 </v-card>
-
+<br>
     <v-row v-show="chartOptions.series.length>0" dense>
        <v-col cols="12" dense>
           <v-card>

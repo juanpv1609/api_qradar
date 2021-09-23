@@ -103,10 +103,7 @@
                                         <template v-slot:item="row">
                                             <tr>
                                                 <td>{{row.item.description}}</td>
-                                                 <td>
-                                                     <div v-for="cat in categories" v-bind:key="cat">
-                                                         <v-chip>{{cat}}</v-chip>
-                                                     </div></td>
+                                                 <td>{{row.item.categories}}</td>
                                                 <td>{{row.item.event_count}}</td>
                                                 <td>{{row.item.offense_source}}</td>
                                                 <td>{{row.item.magnitude}}</td>
@@ -210,9 +207,9 @@ export default {
                                         element.categories= element.categories+ r.categories
                                         element.log_sources= element.log_sources+r.log_sources.length;
                                         element.destination_networks= element.destination_networks+ r.destination_networks
+                                        element.elementos=r;
 
                                     })
-                                    element.elementos=resp.data;
                                     element.loading=false;
 
                                     this.chartOptions.series.push({name:element.description,data:[resp.data.length]})

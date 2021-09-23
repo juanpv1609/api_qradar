@@ -82,89 +82,7 @@
                         </v-toolbar>
                         <br>
                     <v-card-text>
-                            <v-row dense>
-                                <v-col  cols="3" dense>
-                                    <v-card
-                                    class="mx-auto"
-                                    max-width="344"
-                                    shaped
-                                    color="orange darken-4"
-                                >
-                                    <v-list-item
-                                        >
-                                        <v-list-item-content>
-                                        <div class="text-overline mb-4 text--secondary"  >
-                                        Total Eventos
-                                        </div>
-                                        <v-list-item-title class="text-h1 mb-1">
-                                        <h1 class="display-3 text-center font-weight-bold" >{{objeto.event_count}}</h1>
-                                        </v-list-item-title>
-                                        </v-list-item-content>
-                                    </v-list-item>
-                                </v-card>
-                                </v-col>
-                                <v-col  cols="3" dense>
-                                    <v-card
-                                    class="mx-auto"
-                                    max-width="344"
-                                    shaped
-                                    color="orange darken-4"
-                                >
-                                    <v-list-item
-                                        >
-                                        <v-list-item-content>
-                                        <div class="text-overline mb-4 text--secondary"  >
-                                        Total Ofensas
-                                        </div>
-                                        <v-list-item-title class="text-h1 mb-1">
-                                        <h1 class="display-3 text-center font-weight-bold" >{{objeto.ofensas_count}}</h1>
-                                        </v-list-item-title>
-                                        </v-list-item-content>
-                                    </v-list-item>
-                                </v-card>
-                                </v-col>
-                                <v-col  cols="3" dense>
-                                    <v-card
-                                    class="mx-auto"
-                                    max-width="344"
-                                    shaped
-                                    color="orange darken-4"
-                                >
-                                    <v-list-item
-                                        >
-                                        <v-list-item-content>
-                                        <div class="text-overline mb-4 text--secondary"  >
-                                        Total Categorias
-                                        </div>
-                                        <v-list-item-title class="text-h1 mb-1">
-                                        <h1 class="display-3 text-center font-weight-bold" >{{objeto.category_count}}</h1>
-                                        </v-list-item-title>
-                                        </v-list-item-content>
-                                    </v-list-item>
-                                </v-card>
-                                </v-col>
-                                <v-col  cols="3" dense>
-                                    <v-card
-                                    class="mx-auto"
-                                    max-width="344"
-                                    shaped
-                                    color="orange darken-4"
-                                >
-                                    <v-list-item
-                                        >
-                                        <v-list-item-content>
-                                        <div class="text-overline mb-4 text--secondary"  >
-                                        Total LogSources
-                                        </div>
-                                        <v-list-item-title class="text-h1 mb-1">
-                                        <h1 class="display-2 text-center font-weight-bold" >{{objeto.log_sources}}</h1>
-                                        </v-list-item-title>
-                                        </v-list-item-content>
-                                    </v-list-item>
-                                </v-card>
-                                </v-col>
 
-                            </v-row>
                             <v-row v-show="chartObjeto.series.length>0" dense>
                                 <v-col cols="12" dense>
                                     <v-card>
@@ -173,6 +91,26 @@
                                 </v-card-text>
                                 </v-card>
                                 </v-col>
+                                </v-row>
+                                <v-row>
+                                    <v-data-table
+                                        dense
+                                            :headers="headersObjetos"
+                                            :items="objetos"
+                                            :search="searchObjetos"
+                                            :items-per-page="10"
+                                        >
+                                        <template v-slot:item="row">
+                                            <tr>
+                                                <td>{{row.item.description}}</td>
+                                                 <td>{{row.item.categories}}</td>
+                                                <td>{{row.item.event_count}}</td>
+                                                <td>{{row.item.offense_source}}</td>
+                                                <td>{{row.item.magnitude}}</td>
+
+                                            </tr>
+                                        </template>
+                                </v-data-table>
                                 </v-row>
                     </v-card-text>
                 </v-card>
@@ -222,7 +160,16 @@ export default {
 
       },
       objeto:{},
-      objetos:[]
+      objetos:[],
+         searchObjetos: "",
+            headersObjetos: [
+                 { text: "Descripción", value: "description" },
+                  // { text: "Network", value: "network" },
+                 { text: "Categorias", value: "categories" },
+                 { text: "Eventos", value: "event_count" },
+                 { text: "Origen ofensa", value: "offense_source" },
+                 { text: "Magnitud", value: "magnitude" },
+            ],
 
      }
   },
@@ -287,10 +234,12 @@ export default {
         this.objeto.categories=el.categories;
         this.objeto.log_sources=el.log_sources;
         this.objeto.destination_networks=el.destination_networks;
-        this.chartObjeto.series.push({name:'Eventos',data:[(el.event_count)]})
-        this.chartObjeto.series.push({name:'Ofensas',data:[(el.ofensas_count)]})
-        this.chartObjeto.series.push({name:'Categorias',data:[(el.category_count)]})
-        this.chartObjeto.series.push({name:'LogSources',data:[(el.log_sources)]})
+        var tempArray = []
+        tempArray.push({name:'Eventos',data:[(el.event_count)]})
+        tempArray.push({name:'Ofensas',data:[(el.ofensas_count)]})
+        tempArray.push({name:'Categorias',data:[(el.category_count)]})
+        tempArray.push({name:'LogSources',data:[(el.log_sources)]})
+        this.chartObjeto.series.push(tempArray)
 
          this.dialog=true;
 

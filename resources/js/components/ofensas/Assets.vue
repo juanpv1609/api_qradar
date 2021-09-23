@@ -98,7 +98,7 @@ export default {
 
   },
   methods:{
-     
+
       assets() {
         this.loading=true;
          //this.axios.defaults.headers= '';
@@ -110,21 +110,15 @@ export default {
                console.log(response.data);
                this.AssetsItems=response.data;
                     //console.log(this.AssetsItems);
-                  this.AssetsItems.forEach(element => {
-                  //element.ip_addresses=element.interfaces.ip_addresses[0].value;
-                  element.interfaces.forEach(interfaz =>{
-                     interfaz.ip_addresses[0].created=moment(interfaz.ip_addresses[0].created).format("DD/MM/YYYY hh:mm")
-                     interfaz.ip_addresses[0].last_seen_profiler=moment(interfaz.ip_addresses[0].last_seen_profiler).format("DD/MM/YYYY hh:mm")
-                     this.chartOptionsAssets.series.push({name:element.interfaces[0].ip_addresses[0].value,data:[element.users.length]})
+            //       this.AssetsItems.forEach(element => {
+            //       element.interfaces.forEach(interfaz =>{
+            //          interfaz.ip_addresses[0].created=moment(interfaz.ip_addresses[0].created).format("DD/MM/YYYY hh:mm")
+            //          interfaz.ip_addresses[0].last_seen_profiler=moment(interfaz.ip_addresses[0].last_seen_profiler).format("DD/MM/YYYY hh:mm")
+            //          this.chartOptionsAssets.series.push({name:element.interfaces[0].ip_addresses[0].value,data:[element.users.length]})
 
-                  })
-                  // element.users.forEach(users =>{
-
-                  //    console.log(users.username)
-
-                  // })
-                  //this.chartOptionsMostRecentOffense.series.push({name:element.description,data:[moment(element.start_time).format("DD/MM/YYYY hh:mm")]})
-               });
+            //       })
+            //       //this.chartOptionsMostRecentOffense.series.push({name:element.description,data:[moment(element.start_time).format("DD/MM/YYYY hh:mm")]})
+            //    });
                 console.log(this.AssetsItems);
             }).catch(err => console.log(err))
             .finally(() => {

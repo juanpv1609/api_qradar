@@ -137,11 +137,11 @@ export default {
                                     element.ofensas = resp.data.length;
                                     element.event_count=0;
                                     element.category_count=0;
-                                    element.categories=[];
+                                    element.categories='';
                                     resp.data.forEach(r => {
                                         element.event_count=element.eventos+r.event_count
-                                        element.category_count=element.categories+r.category_count
-                                        element.categories.push(r.categories)
+                                        element.category_count=element.category_count+r.category_count
+                                        element.categories= element.categories+ r.categories
                                     })
                                     element.loading=false;
 

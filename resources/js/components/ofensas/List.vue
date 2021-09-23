@@ -279,13 +279,18 @@ export default {
      },
      detalle(el){
          console.log(el);
+        var total= el.event_count + el.ofensas_count +el.category_count + el.log_sources;
          this.titleForm = el.description;
         this.objeto.event_count=el.event_count;
+        this.objeto.ofensas_count=el.ofensas_count;
         this.objeto.category_count=el.category_count;
         this.objeto.categories=el.categories;
         this.objeto.log_sources=el.log_sources;
         this.objeto.destination_networks=el.destination_networks;
-        this.chartObjeto.series.push({name:el.description,data:[{name:'Eventos',y:el.event_count}]})
+        this.chartObjeto.series.push({name:el.description,data:[{name:'Eventos',y:(el.event_count/total)}]})
+        this.chartObjeto.series.push({name:el.description,data:[{name:'Ofensas',y:(el.ofensas_count/total)}]})
+        this.chartObjeto.series.push({name:el.description,data:[{name:'Categorias',y:(el.category_count/total)}]})
+        this.chartObjeto.series.push({name:el.description,data:[{name:'LogSources',y:(el.log_sources/total)}]})
 
          this.dialog=true;
 

@@ -13,6 +13,19 @@ use Illuminate\Support\Facades\Crypt;
 
 class OfensesController extends Controller
 {
+    public function getAssets()
+    {
+        $user = User::with('company', 'rol')->where('id', auth()->user()->id)->First();
+
+        $host = env("API_QRADAR");
+        $response = Http::withHeaders([
+            'Range' => 'items=0-1500',
+                ])->withOptions(['verify' => false])->withBasicAuth($user->username, Crypt::decryptString($user->password))->accept('application/json')
+                ->get($host.'asset_model/assets?fields=hostnames,interfaces,properties,users&filter=domain_id='.$user->company->domain);
+
+
+        dd($response);
+    }
 
     public function getOffenses(){
         $user = User::with('company', 'rol')->where('id', auth()->user()->id)->First();

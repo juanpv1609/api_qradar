@@ -60,7 +60,78 @@
                     </v-card-title>
                     <v-card-text>
                             <v-row dense>
+                                <v-col  cols="3" dense>
+                                <v-hover v-slot="{ hover }">
+                                    <v-card
+                                    class="mx-auto"
+                                    max-width="344"
+                                    shaped
+                                    :elevation="hover ? 12 : 2"
+                                :class="{ 'on-hover': hover }"
 
+                                >
+                                    <v-list-item
+                                        >
+                                        <v-list-item-content>
+                                        <div class="text-overline mb-4 text--secondary"  >
+                                        Total Eventos
+                                        </div>
+                                        <v-list-item-title class="text-h1 mb-1">
+                                        <h1 class="display-3 text-center font-weight-bold" >{{objeto.event_count}}</h1>
+                                        </v-list-item-title>
+                                        </v-list-item-content>
+                                    </v-list-item>
+                                </v-card>
+                                </v-hover>
+                                </v-col>
+                                <v-col  cols="3" dense>
+                                <v-hover v-slot="{ hover }">
+                                    <v-card
+                                    class="mx-auto"
+                                    max-width="344"
+                                    shaped
+                                    :elevation="hover ? 12 : 2"
+                                :class="{ 'on-hover': hover }"
+
+                                >
+                                    <v-list-item
+                                        >
+                                        <v-list-item-content>
+                                        <div class="text-overline mb-4 text--secondary"  >
+                                        Total Categorias
+                                        </div>
+                                        <v-list-item-title class="text-h1 mb-1">
+                                        <h1 class="display-3 text-center font-weight-bold" >{{objeto.category_count}}</h1>
+                                        </v-list-item-title>
+                                        </v-list-item-content>
+                                    </v-list-item>
+                                </v-card>
+                                </v-hover>
+                                </v-col>
+                                <v-col  cols="3" dense>
+                                <v-hover v-slot="{ hover }">
+                                    <v-card
+                                    class="mx-auto"
+                                    max-width="344"
+                                    shaped
+                                    :elevation="hover ? 12 : 2"
+                                :class="{ 'on-hover': hover }"
+
+                                >
+                                    <v-list-item
+                                        >
+                                        <v-list-item-content>
+                                        <div class="text-overline mb-4 text--secondary"  >
+                                        Total LogSources
+                                        </div>
+                                        <v-list-item-title class="text-h1 mb-1">
+                                        <h1 class="display-3 text-center font-weight-bold" >{{objeto.log_sources}}</h1>
+                                        </v-list-item-title>
+                                        </v-list-item-content>
+                                    </v-list-item>
+                                </v-card>
+                                </v-hover>
+                                </v-col>
 
                             </v-row>
                     </v-card-text>
@@ -110,6 +181,7 @@ export default {
                 categories:['Caso de Uso']
             },
       },
+      objeto:{}
 
      }
   },
@@ -139,13 +211,13 @@ export default {
                                     element.category_count=0;
                                     element.categories='';
                                     element.log_sources=0;
-                                    element.destination_networks=[];
+                                    element.destination_networks='';
                                     resp.data.forEach(r => {
                                         element.event_count=element.event_count+r.event_count
                                         element.category_count=element.category_count+r.category_count
                                         element.categories= element.categories+ r.categories
                                         element.log_sources= element.log_sources+r.log_sources.length;
-                                        element.destination_networks.push(r.destination_networks)
+                                        element.destination_networks= element.destination_networks+ r.destination_networks
 
                                     })
                                     element.loading=false;
@@ -163,7 +235,11 @@ export default {
      detalle(el){
          console.log(el);
          this.titleForm = el.description;
-
+        this.objeto.event_count=el.event_count;
+        this.objeto.category_count=el.category_count;
+        this.objeto.categories=el.categories;
+        this.objeto.log_sources=el.log_sources;
+        this.objeto.destination_networks=el.destination_networks;
 
 
          this.dialog=true;

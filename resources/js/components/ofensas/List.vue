@@ -135,9 +135,11 @@ export default {
                                 .then(resp => {
                                     console.log(resp.data);
                                     element.ofensas = resp.data.length;
+                                    element.eventos=0;
+                                    element.categories=0;
                                     resp.data.forEach(r => {
-                                        element.eventos=r.event_count
-                                        element.categories=r.category_count
+                                        element.eventos=element.eventos+r.event_count
+                                        element.categories=element.categories+r.category_count
                                     })
                                     element.loading=false;
 

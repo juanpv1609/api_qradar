@@ -55,7 +55,8 @@
         <v-row justify="center">
             <v-dialog v-model="dialog" fullscreen
                 hide-overlay
-                transition="dialog-bottom-transition">
+                transition="dialog-bottom-transition"
+                style="background:#F5F5F5;">
                 <v-card>
                     <v-toolbar
                         dark
@@ -64,7 +65,7 @@
                         <v-btn
                             icon
                             dark
-                            @click="this.cerrar()"
+                            @click="cerrar()"
                         >
                             <v-icon>mdi-close</v-icon>
                         </v-btn>
@@ -74,7 +75,7 @@
                             <v-btn
                             dark
                             text
-                            @click="this.cerrar()"
+                            @click="cerrar()"
                             >
                             Cerrar
                             </v-btn>
@@ -193,7 +194,6 @@ export default {
                         this.axios
                                 .get(`/api/offenses-rule/${element.qid}`)
                                 .then(resp => {
-                                    this.objetos=resp.data
                                     element.ofensas = resp.data.length;
                                     element.event_count=0;
                                     element.ofensas_count=resp.data.length;
@@ -235,6 +235,7 @@ export default {
         this.objeto.log_sources=el.log_sources;
         this.objeto.destination_networks=el.destination_networks;
         this.objeto.elementos=el.elementos;
+        this.objetos=el.elementos
 
         this.chartObjeto.series.push({name:'Eventos',data:[(el.event_count)]})
         this.chartObjeto.series.push({name:'Ofensas',data:[(el.ofensas_count)]})

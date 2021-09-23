@@ -131,8 +131,8 @@
                                                          </div>
                                                          </td>
                                                          <td>
-                                                     <div v-for="log in row.item.log_sources" v-bind:key="log">
-                                                         <v-chip small>{{log}}</v-chip>
+                                                     <div v-for="log in row.item.log_sources" v-bind:key="log.id">
+                                                         <v-chip small>{{log.name}}</v-chip>
                                                          </div>
                                                          </td>
                                                 <td>{{row.item.event_count}}</td>

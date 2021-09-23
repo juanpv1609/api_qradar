@@ -59,7 +59,7 @@
                 <v-card>
                     <v-toolbar
                         dark
-                        color="primary"
+                        color="black"
                         >
                         <v-btn
                             icon
@@ -88,7 +88,7 @@
                                     class="mx-auto"
                                     max-width="344"
                                     shaped
-                                    color="indigo darken-1"
+                                    color="orange darken-4"
                                 >
                                     <v-list-item
                                         >
@@ -108,7 +108,7 @@
                                     class="mx-auto"
                                     max-width="344"
                                     shaped
-                                    color="indigo darken-1"
+                                    color="orange darken-4"
                                 >
                                     <v-list-item
                                         >
@@ -128,7 +128,7 @@
                                     class="mx-auto"
                                     max-width="344"
                                     shaped
-                                    color="indigo darken-1"
+                                    color="orange darken-4"
                                 >
                                     <v-list-item
                                         >
@@ -148,7 +148,7 @@
                                     class="mx-auto"
                                     max-width="344"
                                     shaped
-                                    color="indigo darken-1"
+                                    color="orange darken-4"
                                 >
                                     <v-list-item
                                         >
@@ -227,21 +227,22 @@ export default {
                         this.axios
                                 .get(`/api/offenses-rule/${element.qid}`)
                                 .then(resp => {
-                                    element=resp.data
-                                    // element.ofensas = resp.data.length;
-                                    // element.event_count=0;
-                                    // element.category_count=0;
-                                    // element.categories='';
-                                    // element.log_sources=0;
-                                    // element.destination_networks='';
-                                    // resp.data.forEach(r => {
-                                    //     element.event_count=element.event_count+r.event_count
-                                    //     element.category_count=element.category_count+r.category_count
-                                    //     element.categories= element.categories+ r.categories
-                                    //     element.log_sources= element.log_sources+r.log_sources.length;
-                                    //     element.destination_networks= element.destination_networks+ r.destination_networks
+                                    this.objetos=resp.data
+                                    element.ofensas = resp.data.length;
+                                    element.event_count=0;
+                                    element.category_count=0;
+                                    element.categories='';
+                                    element.log_sources=0;
+                                    element.destination_networks='';
+                                    resp.data.forEach(r => {
+                                        element.event_count=element.event_count+r.event_count
+                                        element.category_count=element.category_count+r.category_count
+                                        element.categories= element.categories+ r.categories
+                                        element.log_sources= element.log_sources+r.log_sources.length;
+                                        element.destination_networks= element.destination_networks+ r.destination_networks
 
-                                    // })
+                                    })
+                                    element.elementos=resp.data;
                                     element.loading=false;
 
                                     this.chartOptions.series.push({name:element.description,data:[resp.data.length]})

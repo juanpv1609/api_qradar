@@ -60,7 +60,7 @@
                 <v-card style="background:#F5F5F5;">
                     <v-toolbar
                         dark
-                        color="black"
+                        color="dark"
                         >
                         <v-btn
                             icon
@@ -127,11 +127,17 @@
                                                  <!-- <td>{{row.item.categories}}</td> -->
                                                  <td>
                                                      <div v-for="cat in row.item.categories" v-bind:key="cat">
-                                                         <v-chip small>{{cat}}</v-chip>
+                                                         <v-chip small color="primary">{{cat}}</v-chip>
+                                                         </div>
+                                                         </td>
+                                                         <td>
+                                                     <div v-for="log in row.item.log_sources" v-bind:key="log">
+                                                         <v-chip small>{{log}}</v-chip>
                                                          </div>
                                                          </td>
                                                 <td>{{row.item.event_count}}</td>
                                                 <td>{{row.item.offense_source}}</td>
+                                                <td>{{row.item.start_time}} | {{row.item.last_persisted_time}}</td>
                                                 <td>{{row.item.magnitude}}</td>
 
                                             </tr>
@@ -150,7 +156,7 @@
 
 <script>
 // @ is an alias to /src
-
+import moment from 'moment';
 export default {
 
   name: "Ofensas",
@@ -194,8 +200,10 @@ export default {
                  { text: "Descripción", value: "description" },
                   // { text: "Network", value: "network" },
                  { text: "Categorias", value: "categories" },
+                 { text: "LogSources", value: "log_sources" },
                  { text: "Eventos", value: "event_count" },
                  { text: "Origen ofensa", value: "offense_source" },
+                 { text: "Start / Last (Time)", value: "offense_source" },
                  { text: "Magnitud", value: "magnitude" },
             ],
 
@@ -234,7 +242,10 @@ export default {
                                         element.category_count=element.category_count+r.category_count
                                         element.categories= element.categories+ r.categories
                                         element.log_sources= element.log_sources+r.log_sources.length;
-                                        element.destination_networks= element.destination_networks+ r.destination_networks
+                                        element.destination_networks= element.destination_networks+ r.destination_networks;
+                                        element.start_time=moment(element.start_time).format("DD/MM/YYYY hh:mm");
+                                        element.last_persisted_time=moment(element.last_persisted_time).format("DD/MM/YYYY hh:mm");
+
                                         element.elementos.push(r);
 
                                     })
@@ -263,6 +274,8 @@ export default {
         this.objeto.log_sources=el.log_sources;
         this.objeto.destination_networks=el.destination_networks;
         this.objeto.elementos=el.elementos;
+        this.objeto.start_time=el.start_time;
+        this.objeto.last_persisted_time=el.last_persisted_time;
         this.objetos=el.elementos
 
         this.chartObjeto.series.push({name:'Eventos',data:[(el.event_count)]})

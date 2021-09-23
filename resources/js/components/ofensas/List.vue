@@ -138,13 +138,15 @@ export default {
                                     element.event_count=0;
                                     element.category_count=0;
                                     element.categories='';
-                                    element.log_sources=[];
+                                    element.log_sources=0;
+                                    element.destination_networks=[];
                                     resp.data.forEach(r => {
                                         element.event_count=element.event_count+r.event_count
                                         element.category_count=element.category_count+r.category_count
                                         element.categories= element.categories+ r.categories
-                                            element.log_sources.push(r.log_sources)
-                                        
+                                        element.log_sources= element.log_sources+r.log_sources.length;
+                                        element.destination_networks.push(r.destination_networks)
+
                                     })
                                     element.loading=false;
 

@@ -53,11 +53,34 @@
     </v-row>
 <template>
         <v-row justify="center">
-            <v-dialog v-model="dialog" persistent max-width="800px">
+            <v-dialog v-model="dialog" fullscreen
+                hide-overlay
+                transition="dialog-bottom-transition">
                 <v-card>
-                    <v-card-title>
-                        <span class="headline">{{ titleForm }}</span>
-                    </v-card-title>
+                    <v-toolbar
+                        dark
+                        color="primary"
+                        >
+                        <v-btn
+                            icon
+                            dark
+                            @click="dialog = false"
+                        >
+                            <v-icon>mdi-close</v-icon>
+                        </v-btn>
+                        <v-toolbar-title>{{ titleForm }}</v-toolbar-title>
+                        <v-spacer></v-spacer>
+                        <v-toolbar-items>
+                            <v-btn
+                            dark
+                            text
+                            @click="dialog = false"
+                            >
+                            Cerrar
+                            </v-btn>
+                        </v-toolbar-items>
+                        </v-toolbar>
+                        <br>
                     <v-card-text>
                             <v-row dense>
                                 <v-col  cols="3" dense>
@@ -75,6 +98,26 @@
                                         </div>
                                         <v-list-item-title class="text-h1 mb-1">
                                         <h1 class="display-3 text-center font-weight-bold" >{{objeto.event_count}}</h1>
+                                        </v-list-item-title>
+                                        </v-list-item-content>
+                                    </v-list-item>
+                                </v-card>
+                                </v-col>
+                                <v-col  cols="3" dense>
+                                    <v-card
+                                    class="mx-auto"
+                                    max-width="344"
+                                    shaped
+
+                                >
+                                    <v-list-item
+                                        >
+                                        <v-list-item-content>
+                                        <div class="text-overline mb-4 text--secondary"  >
+                                        Total Ofensas
+                                        </div>
+                                        <v-list-item-title class="text-h1 mb-1">
+                                        <h1 class="display-3 text-center font-weight-bold" >{{objeto.ofensas}}</h1>
                                         </v-list-item-title>
                                         </v-list-item-content>
                                     </v-list-item>
@@ -123,16 +166,6 @@
 
                             </v-row>
                     </v-card-text>
-                    <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <v-btn
-                            color="error"
-                            text
-                            @click="dialog = false"
-                        >
-                            Cerrar
-                        </v-btn>
-                    </v-card-actions>
                 </v-card>
             </v-dialog>
         </v-row>
@@ -169,7 +202,8 @@ export default {
                 categories:['Caso de Uso']
             },
       },
-      objeto:{}
+      objeto:{},
+      objetos:[]
 
      }
   },
@@ -193,7 +227,7 @@ export default {
                         this.axios
                                 .get(`/api/offenses-rule/${element.qid}`)
                                 .then(resp => {
-                                    console.log(resp.data);
+                                    this.objetos=resp.data
                                     element.ofensas = resp.data.length;
                                     element.event_count=0;
                                     element.category_count=0;
@@ -216,7 +250,9 @@ export default {
 
 
                                 });
-                                console.log(this.reglas);
+                                //console.log(this.reglas);
+                                    console.log(this.objetos);
+
                     });
                 });
      },

@@ -61,13 +61,7 @@ export default {
      return {
         loading:false,
 
-        configHeaders : {
-         "auth":{
-                  "username": "jperugachi",
-                  "password": "jk1609PV*"
-               },
-               //"Range": "items=0-50"
-         },
+
         AssetsItems:[],
          searchAssets: "",
             headersAssets: [
@@ -94,23 +88,22 @@ export default {
      }
   },
   mounted() {
-      this.getData();
+      //this.getData();
 
   },
   created() {
 
-
+      this.assets();
     // this.creaChart();
 
   },
   methods:{
-     async getData(){
-        await this.assets()
-     },
-     async assets() {
+     
+      assets() {
         this.loading=true;
          //this.axios.defaults.headers= '';
-        await this.axios
+         console.log('eeeeee');
+         this.axios
             .get(`/api/get-assets`)
             .then(response => {
                //this.regla_136124=response.data;

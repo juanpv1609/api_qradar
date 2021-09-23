@@ -56,8 +56,8 @@
             <v-dialog v-model="dialog" fullscreen
                 hide-overlay
                 transition="dialog-bottom-transition"
-                style="background:#F5F5F5;">
-                <v-card>
+                >
+                <v-card style="background:#F5F5F5;">
                     <v-toolbar
                         dark
                         color="black"
@@ -201,13 +201,14 @@ export default {
                                     element.categories='';
                                     element.log_sources=0;
                                     element.destination_networks='';
+                                    element.elementos=[];
                                     resp.data.forEach(r => {
                                         element.event_count=element.event_count+r.event_count
                                         element.category_count=element.category_count+r.category_count
                                         element.categories= element.categories+ r.categories
                                         element.log_sources= element.log_sources+r.log_sources.length;
                                         element.destination_networks= element.destination_networks+ r.destination_networks
-                                        element.elementos=r;
+                                        element.elementos.push(r);
 
                                     })
                                     element.loading=false;

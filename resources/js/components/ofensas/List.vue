@@ -33,9 +33,18 @@
                     </v-list-item-content>
                 </v-list-item>
 
-                <v-card-actions>
-
-                </v-card-actions>
+                <v-fab-transition>
+      <v-btn
+        color="primary"
+        fab
+        large
+        dark
+        bottom
+        left
+      >
+        <v-icon>mdi-reload</v-icon>
+      </v-btn>
+    </v-fab-transition>
             </v-card>
                  </v-hover>
             </v-col>

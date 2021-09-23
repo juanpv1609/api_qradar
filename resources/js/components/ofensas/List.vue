@@ -51,7 +51,33 @@
     </v-card>
        </v-col>
     </v-row>
+<template>
+        <v-row justify="center">
+            <v-dialog v-model="dialog" persistent max-width="800px">
+                <v-card>
+                    <v-card-title>
+                        <span class="headline">{{ titleForm }}</span>
+                    </v-card-title>
+                    <v-card-text>
+                            <v-row dense>
 
+
+                            </v-row>
+                    </v-card-text>
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn
+                            color="error"
+                            text
+                            @click="dialog = false"
+                        >
+                            Cerrar
+                        </v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
+        </v-row>
+    </template>
   </div>
 </template>
 
@@ -64,6 +90,7 @@ export default {
   data() {
      return {
         loading:false,
+        dialog: false,
         ofensas:[],
         reglas:[],
          chartOptions: {
@@ -120,6 +147,15 @@ export default {
                     });
                 });
      },
+     detalle(el){
+         console.log(el);
+         this.titleForm = el.description;
+
+
+
+         this.dialog=true;
+
+     }
 
 
   }

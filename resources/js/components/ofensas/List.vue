@@ -117,7 +117,7 @@
                                         Total Ofensas
                                         </div>
                                         <v-list-item-title class="text-h1 mb-1">
-                                        <h1 class="display-3 text-center font-weight-bold" >{{objeto.ofensas}}</h1>
+                                        <h1 class="display-3 text-center font-weight-bold" >{{objeto.ofensas_count}}</h1>
                                         </v-list-item-title>
                                         </v-list-item-content>
                                     </v-list-item>
@@ -165,6 +165,15 @@
                                 </v-col>
 
                             </v-row>
+                            <v-row v-show="chartObjeto.series.length>0" dense>
+                                <v-col cols="12" dense>
+                                    <v-card>
+                                <v-card-text>
+                                        <highcharts :options="chartObjeto" ></highcharts>
+                                </v-card-text>
+                                </v-card>
+                                </v-col>
+                                </v-row>
                     </v-card-text>
                 </v-card>
             </v-dialog>
@@ -202,6 +211,16 @@ export default {
                 categories:['Caso de Uso']
             },
       },
+      chartObjeto: {
+        chart: {
+          type: 'pie'
+        },
+        title: {
+          text: 'Detalle'
+        },
+        series: [ ],
+
+      },
       objeto:{},
       objetos:[]
 
@@ -230,6 +249,7 @@ export default {
                                     this.objetos=resp.data
                                     element.ofensas = resp.data.length;
                                     element.event_count=0;
+                                    element.ofensas_count=resp.data.length;
                                     element.category_count=0;
                                     element.categories='';
                                     element.log_sources=0;
@@ -265,7 +285,7 @@ export default {
         this.objeto.categories=el.categories;
         this.objeto.log_sources=el.log_sources;
         this.objeto.destination_networks=el.destination_networks;
-
+        this.chartObjeto.series.push({name:el.description,data:[{name:'Eventos',y:el.event_count}]})
 
          this.dialog=true;
 

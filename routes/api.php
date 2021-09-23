@@ -62,7 +62,7 @@ Route::middleware('api')->group(function () {
     Route::get('busqueda', [OfensesController::class,'busqueda']);
 
     Route::post('hacia-ip-maliciosa', [OfensesController::class,'haciaIPMAliciosas']);
-    Route::post('get-assets', [AssetsController::class,'getAssets']);
+    Route::get('get-assets', [AssetsController::class,'getAssets']);
 
 
 

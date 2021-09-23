@@ -271,13 +271,13 @@ export default {
         this.objeto.ofensas_count=el.ofensas_count;
         this.objeto.category_count=el.category_count;
         this.objeto.categories=el.categories;
-        this.objeto.log_sources=el.log_sources;
+        //this.objeto.log_sources=el.log_sources;
         this.objeto.destination_networks=el.destination_networks;
         this.objeto.elementos=el.elementos;
         this.objeto.start_time=moment(el.start_time).format("DD/MM/YYYY hh:mm");
         this.objeto.last_persisted_time=moment(el.last_persisted_time).format("DD/MM/YYYY hh:mm");
         this.objetos=el.elementos
-        this.objeto.log_sources = this.objeto.log_sources.filter(function(car) {
+        this.objeto.log_sources = el.log_sources.filter(function(car) {
                         return car.type_name !== 'EventCRE';
                     });
 

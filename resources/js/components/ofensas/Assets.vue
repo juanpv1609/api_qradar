@@ -39,28 +39,28 @@
             <template v-slot:item="row">
                 <tr>
                     <td>{{row.item.interfaces[0].ip_addresses[0].value}}</td>
-                     <td>{{row.item.users.length}}</td> 
+                     <td>{{row.item.users.length}}</td>
                     <td>{{row.item.interfaces[0].ip_addresses[0].created}}</td>
                     <td>{{row.item.interfaces[0].ip_addresses[0].last_seen_profiler}}</td>
-                    
+
                 </tr>
             </template>
-         </v-data-table> 
+         </v-data-table>
             </v-card-text>
          </v-card>
-       </v-col> 
+       </v-col>
       </v-row>
    </div>
 </template>
 <script>
 import moment from 'moment';
 export default {
-  
+
   name: "Ofensas",
   data() {
      return {
         loading:false,
-        
+
         configHeaders : {
          "auth":{
                   "username": "jperugachi",
@@ -95,19 +95,53 @@ export default {
   },
   mounted() {
       this.getData();
-     
+
   },
   created() {
-     
-     
+
+
     // this.creaChart();
-     
+
   },
   methods:{
      async getData(){
         await this.assets()
      },
      async assets() {
+        this.loading=true;
+         //this.axios.defaults.headers= '';
+        await this.axios
+            .get(`/api/get-assets`)
+            .then(response => {
+               //this.regla_136124=response.data;
+               //console.log(response.data);
+               this.AssetsItems=response.data;
+                    //console.log(this.AssetsItems);
+                  this.AssetsItems.forEach(element => {
+                  //element.ip_addresses=element.interfaces.ip_addresses[0].value;
+                  element.interfaces.forEach(interfaz =>{
+                     interfaz.ip_addresses[0].created=moment(interfaz.ip_addresses[0].created).format("DD/MM/YYYY hh:mm")
+                     interfaz.ip_addresses[0].last_seen_profiler=moment(interfaz.ip_addresses[0].last_seen_profiler).format("DD/MM/YYYY hh:mm")
+                     this.chartOptionsAssets.series.push({name:element.interfaces[0].ip_addresses[0].value,data:[element.users.length]})
+
+                  })
+                  // element.users.forEach(users =>{
+
+                  //    console.log(users.username)
+
+                  // })
+                  //this.chartOptionsMostRecentOffense.series.push({name:element.description,data:[moment(element.start_time).format("DD/MM/YYYY hh:mm")]})
+               });
+                console.log(this.AssetsItems);
+            }).catch(err => console.log(err))
+            .finally(() => {
+               this.loading=false;
+
+
+            });
+
+     },
+     async assets2() {
         this.loading=true;
          //this.axios.defaults.headers= '';
          this.axios.defaults.headers.common['Range'] = 'items=0-1500';
@@ -127,20 +161,20 @@ export default {
 
                   })
                   // element.users.forEach(users =>{
-                     
+
                   //    console.log(users.username)
 
                   // })
                   //this.chartOptionsMostRecentOffense.series.push({name:element.description,data:[moment(element.start_time).format("DD/MM/YYYY hh:mm")]})
-               });  
+               });
                 console.log(this.AssetsItems);
             }).catch(err => console.log(err))
             .finally(() => {
                this.loading=false;
 
-               
+
             });
-            
+
      },
   }
 }

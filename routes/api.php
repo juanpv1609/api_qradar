@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RulesController;
+use App\Http\Controllers\AssetsController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\OfensesController;
 use App\Http\Controllers\SearchesController;
@@ -57,7 +58,12 @@ Route::middleware('api')->group(function () {
     Route::get('source-address', [OfensesController::class,'sourceAddress']);
     Route::get('local-destination', [OfensesController::class,'localDestination']);
     Route::get('offenses-rule/{qid}', [OfensesController::class,'offensesRule']);
-    Route::get('busqueda/{qid}', [OfensesController::class,'busqueda']);
+    //Route::get('busqueda/{qid}', [OfensesController::class,'busqueda']);
+    Route::get('busqueda', [OfensesController::class,'busqueda']);
+
+    Route::post('hacia-ip-maliciosa', [OfensesController::class,'haciaIPMAliciosas']);
+    Route::post('get-assets', [AssetsController::class,'getAssets']);
+
 
 
 

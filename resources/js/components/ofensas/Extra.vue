@@ -33,7 +33,7 @@ export default {
   },
 methods:{
     async getData(){
-        await this.topOffenseCategories();
+        await this.haciaIPsMaliciosas();
         //await this.mostRecentOffenses();
         //wait this.creaChart();
      },
@@ -87,6 +87,54 @@ methods:{
                 });
 
      },
+     haciaIPsMaliciosas(){
+         this.axios
+            .get(`/api/searches`)
+            .then(response => {
+                   this.searches = response.data;
+                    var aux={};
+                        var temp=[];
+                    for (let index = 0; index < this.searches.length; index++) {
+                        const element = this.searches[index];
+                         //element.loading=true;
+                        this.axios
+                                .get(`/api/busqueda`)
+                                .then(resp => {
+                                    //element.loading=false;
+                                    console.log(resp);
+                                        aux.id=index;
+                                        aux = {
+                                            yAxis:{
+                                                },
+                                                xAxis:{},
+                                            chart: {type:'column'},
+                                            title: {text: element.description},
+                                            series:[]
+                                    }
+                                    resp.data.events.forEach(e => {
+
+                                        aux.yAxis={
+                                            title:{
+                                                text:element.data
+                                            }
+                                        }
+                                        aux.xAxis={
+                                            categories:[element.name]
+                                        }
+                                        aux.series.push({name:(e[element.name]) ? e[element.name] : 'N/A',data:[e[element.data]]})
+
+                                    });
+                                temp.push(aux)
+                                }).catch(err => console.log(err))
+                                .finally(() => {
+                                    });
+                    }
+                 this.charts=temp;
+
+                }).catch(err => console.log(err))
+            .finally(() => {
+                });
+     }
 }
 }
 </script>

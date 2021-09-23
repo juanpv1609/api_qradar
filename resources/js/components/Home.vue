@@ -17,21 +17,22 @@
                         </v-btn>
                     </v-card-title>
                     <v-card-text>
-                        <v-row>
-                            <v-col cols="12" sm="4">
+                            <table>
+                                <tr>
+                                    <td>
                                 <v-img
                                     src="../img/nuevologo-radical.png"
                                     alt="Logo"
+                                    width="200"
                                 ></v-img>
-                            </v-col>
-                            <v-col cols="12" sm="8">
-                                <h3>RGSDM (Radical Gestión SDM)</h3>
-                                <p>
-                                    Sistema de gestión automatizada de alertas,
-                                    software web destinado a la automatización y
-                                    gestión de tareas y asignación
-                                    responsabilidades al personal que participan
-                                    en un contrato.
+                                    </td>
+                                    <td>
+                                         <h2>IBM QRadar Rest API</h2>
+                                        <p>
+                                    Puede acceder a la API RESTful enviando solicitudes HTTPS a URL específicas (puntos finales) en QRadar SIEM Console. Para enviar estas solicitudes, utilice la implementación HTTP que está integrada en el lenguaje de programación de su elección. Cada solicitud contiene información de autenticación y parámetros que modifican la solicitud.
+                                </p>
+                                <p >
+                                    An API endpoint contains the URL of the resource that you want to access and the action that you want to complete on that resource. The action is indicated by the HTTP method of the request: GET, POST, PUT, or DELETE.
                                 </p>
                                 Version 1.0
                                 <a
@@ -41,8 +42,16 @@
                                 >
                                 &copy;{{ new Date().getFullYear() }}. Todos los
                                 derechos reservados
-                            </v-col>
-                        </v-row>
+                                    </td>
+                                    <td>
+                                        <v-img
+                                    src="../img/IBM-QRadar.png"
+                                    alt="Logo"
+                                    width="200"
+                                ></v-img>
+                                    </td>
+                                </tr>
+                            </table>
                         <v-row >
                             <v-col cols="12" >
                                 <v-carousel
@@ -88,57 +97,6 @@
                                 </v-carousel>
 
                             </v-col>
-                           <!--  <v-col cols="12" sm="6">
-                                <h5>Accesos directos:</h5>
-                                <v-row>
-                                    <v-col cols="12" sm="6">
-                                        <v-hover>
-                                            <template v-slot:default="{ hover }">
-                                            <v-card
-                                                class="mx-auto"
-                                                color="blue"
-                                                dark
-                                            >
-
-
-                                                <v-card-text>
-                                                    <v-icon x-large style="font-size:50px">mdi-account-multiple</v-icon>
-                                                <h2 class="title">
-                                                    Usuarios
-                                                </h2>
-                                                </v-card-text>
-
-
-
-                                                <v-fade-transition>
-                                                <v-overlay
-                                                    v-if="hover"
-                                                    absolute
-                                                    color="#036358"
-                                                >
-                                                    <v-btn  class="mx-2"
-
-                                                        link
-                                                        :to="'/login'">Ver usuarios</v-btn>
-                                                </v-overlay>
-                                                </v-fade-transition>
-                                            </v-card>
-                                            </template>
-                                        </v-hover>
-                                    </v-col>
-                                     <v-col cols="12" sm="6">
-
-                                    </v-col>
-                                </v-row>
-                                <v-row>
-                                    <v-col cols="12" sm="6">
-
-                                    </v-col>
-                                     <v-col cols="12" sm="6">
-
-                                    </v-col>
-                                </v-row>
-                            </v-col> -->
                         </v-row>
                     </v-card-text>
                 </v-card>
@@ -154,56 +112,28 @@
           overlay: false,
           slides: [
                 {
-                    title: 'Gestión de usuarios',
-                    subtitle: 'Sesiones, seguridad, roles',
+                    title: 'Visualizacion de ofensas',
+                    subtitle: 'Contabilizado de ofensas según el caso de uso',
                     icon:'mdi-account-multiple',
-                    link: '/usuarios'
+                    link: '/ofensas'
                 },
                 {
-                    title: 'Gestión de clientes',
-                    subtitle: 'Información de contacto',
+                    title: 'Overview',
+                    subtitle: 'Información destacada de sus activos de seguridad',
                     icon:'mdi-face',
-                    link: '/clientes'
+                    link: '/ofensas-overview'
                 },
                 {
-                    title: 'Creación de contratos',
-                    subtitle: 'Fechas plazo, archivos adjuntos, etc.',
+                    title: 'Visualización de activos',
+                    subtitle: 'Un listado de sus activos integrados',
                     icon:'mdi-book',
-                    link: '/contratos'
+                    link: '/assets'
                 },
-                {
-                    title: 'Creación automatica de tareas',
-                    subtitle: 'Fechas plazo, responsables, tipo de tarea, entregable, etc.',
-                    icon:'mdi-format-list-checks',
-                    link: '/contratos'
-                },
-                {
-                    title: 'Modificación de tareas',
-                    subtitle: 'Cambio de estado, adjuntar documentos.',
-                    icon:'mdi-pencil',
-                    link: '/tareas'
-                },
-                {
-                    title: 'Notificaciones automaticas',
-                    subtitle: 'Depende de la fecha de entrega, disparo automático gestionable.',
-                    icon:'mdi-bell',
-                    link: ''
-                },
-                {
-                    title: 'Emisión de reportes',
-                    subtitle: 'Rango de fechas, responsables, tareas pendientes, terminadas, etc.',
-                    icon:'mdi-chart-bar',
-                    link: '/reporte-tareas'
-                }
           ],
           colors: [
           'light-blue lighten-3',
           'light-green lighten-3',
           'orange lighten-3',
-          'teal lighten-3',
-          'deep-purple lighten-3',
-          'red lighten-3',
-          'deep-orange lighten-3'
         ],
       }
     }

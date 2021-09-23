@@ -127,12 +127,12 @@
                                                  <!-- <td>{{row.item.categories}}</td> -->
                                                  <td>
                                                      <div v-for="cat in row.item.categories" v-bind:key="cat">
-                                                         <v-chip small color="primary">{{cat}}</v-chip>
+                                                         <v-chip x-small class="ma-1" color="primary">{{cat}}</v-chip>
                                                          </div>
                                                          </td>
                                                          <td>
                                                      <div v-for="log in row.item.log_sources" v-bind:key="log.id">
-                                                         <v-chip small>{{log.name}}</v-chip>
+                                                         <v-chip x-small class="ma-1">{{log.name}}</v-chip>
                                                          </div>
                                                          </td>
                                                 <td>{{row.item.event_count}}</td>
@@ -274,9 +274,12 @@ export default {
         this.objeto.log_sources=el.log_sources;
         this.objeto.destination_networks=el.destination_networks;
         this.objeto.elementos=el.elementos;
-        this.objeto.start_time=el.start_time;
-        this.objeto.last_persisted_time=el.last_persisted_time;
+        this.objeto.start_time=moment(el.start_time).format("DD/MM/YYYY hh:mm");
+        this.objeto.last_persisted_time=moment(el.last_persisted_time).format("DD/MM/YYYY hh:mm");
         this.objetos=el.elementos
+        this.objeto.log_sources = this.objeto.log_sources.filter(function(car) {
+                        return car.type_name !== 'EventCRE';
+                    });
 
         this.chartObjeto.series.push({name:'Eventos',data:[(el.event_count)]})
         this.chartObjeto.series.push({name:'Ofensas',data:[(el.ofensas_count)]})

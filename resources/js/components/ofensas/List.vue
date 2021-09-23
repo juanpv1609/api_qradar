@@ -1,7 +1,8 @@
 <template>
   <div>
-
-    <v-row dense>
+<v-card>
+    <v-card-text>
+        <v-row dense>
             <v-col v-for="regla in reglas" v-bind:key="regla.qid" cols="3" dense>
                  <v-hover v-slot="{ hover }">
                 <v-card
@@ -33,24 +34,28 @@
                     </v-list-item-content>
                 </v-list-item>
 
-                <v-fab-transition>
-      <v-btn
-        color="primary"
-        fab
-        large
-        dark
-        bottom
-        left
-      >
-        <v-icon>mdi-reload</v-icon>
-      </v-btn>
-    </v-fab-transition>
+
             </v-card>
                  </v-hover>
             </v-col>
 
 
     </v-row>
+    </v-card-text>
+    <v-fab-transition>
+                    <v-btn
+                        color="primary"
+                        fab
+                        large
+                        dark
+                        bottom
+                        left
+                    >
+                        <v-icon>mdi-reload</v-icon>
+                    </v-btn>
+                    </v-fab-transition>
+</v-card>
+
     <v-row v-show="chartOptions.series.length>0" dense>
        <v-col cols="12" dense>
           <v-card>
@@ -146,7 +151,7 @@
                                                          </td>
                                                 <td>{{row.item.event_count}}</td>
                                                 <td>{{row.item.offense_source}}</td>
-                                                <td>{{row.item.start_time}} | {{row.item.last_persisted_time}}</td>
+                                                <!-- <td>{{row.item.start_time}} | {{row.item.last_persisted_time}}</td> -->
                                                 <td>{{row.item.magnitude}}</td>
 
                                             </tr>
@@ -212,7 +217,7 @@ export default {
                  { text: "LogSources", value: "log_sources" },
                  { text: "Eventos", value: "event_count" },
                  { text: "Origen ofensa", value: "offense_source" },
-                 { text: "Start / Last (Time)", value: "offense_source" },
+                //  { text: "Start / Last (Time)", value: "offense_source" },
                  { text: "Magnitud", value: "magnitude" },
             ],
 

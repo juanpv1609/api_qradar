@@ -17,7 +17,7 @@
 
                     >
                     <v-list-item-content>
-                    <div class="text-overline mb-4 text--secondary">
+                    <div class="text-overline mb-4 text--secondary" link @click="detalle(regla)">
                     {{ regla.description }}
                     <v-chip x-small color="dark" dark label>{{ regla.it_ot }}</v-chip>
                     </div>

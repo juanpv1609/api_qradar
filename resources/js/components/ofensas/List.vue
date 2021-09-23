@@ -88,7 +88,7 @@
                                     class="mx-auto"
                                     max-width="344"
                                     shaped
-
+                                    color="indigo darken-1"
                                 >
                                     <v-list-item
                                         >
@@ -108,7 +108,7 @@
                                     class="mx-auto"
                                     max-width="344"
                                     shaped
-
+                                    color="indigo darken-1"
                                 >
                                     <v-list-item
                                         >
@@ -128,7 +128,7 @@
                                     class="mx-auto"
                                     max-width="344"
                                     shaped
-
+                                    color="indigo darken-1"
                                 >
                                     <v-list-item
                                         >
@@ -148,7 +148,7 @@
                                     class="mx-auto"
                                     max-width="344"
                                     shaped
-
+                                    color="indigo darken-1"
                                 >
                                     <v-list-item
                                         >
@@ -157,7 +157,7 @@
                                         Total LogSources
                                         </div>
                                         <v-list-item-title class="text-h1 mb-1">
-                                        <h1 class="display-3 text-center font-weight-bold" >{{objeto.log_sources}}</h1>
+                                        <h1 class="display-2 text-center font-weight-bold" >{{objeto.log_sources}}</h1>
                                         </v-list-item-title>
                                         </v-list-item-content>
                                     </v-list-item>
@@ -227,21 +227,21 @@ export default {
                         this.axios
                                 .get(`/api/offenses-rule/${element.qid}`)
                                 .then(resp => {
-                                    this.objetos=resp.data
-                                    element.ofensas = resp.data.length;
-                                    element.event_count=0;
-                                    element.category_count=0;
-                                    element.categories='';
-                                    element.log_sources=0;
-                                    element.destination_networks='';
-                                    resp.data.forEach(r => {
-                                        element.event_count=element.event_count+r.event_count
-                                        element.category_count=element.category_count+r.category_count
-                                        element.categories= element.categories+ r.categories
-                                        element.log_sources= element.log_sources+r.log_sources.length;
-                                        element.destination_networks= element.destination_networks+ r.destination_networks
+                                    element=resp.data
+                                    // element.ofensas = resp.data.length;
+                                    // element.event_count=0;
+                                    // element.category_count=0;
+                                    // element.categories='';
+                                    // element.log_sources=0;
+                                    // element.destination_networks='';
+                                    // resp.data.forEach(r => {
+                                    //     element.event_count=element.event_count+r.event_count
+                                    //     element.category_count=element.category_count+r.category_count
+                                    //     element.categories= element.categories+ r.categories
+                                    //     element.log_sources= element.log_sources+r.log_sources.length;
+                                    //     element.destination_networks= element.destination_networks+ r.destination_networks
 
-                                    })
+                                    // })
                                     element.loading=false;
 
                                     this.chartOptions.series.push({name:element.description,data:[resp.data.length]})
@@ -251,7 +251,7 @@ export default {
 
                                 });
                                 //console.log(this.reglas);
-                                    console.log(this.objetos);
+                                    //console.log(this.objetos);
 
                     });
                 });

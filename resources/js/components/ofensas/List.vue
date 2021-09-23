@@ -144,9 +144,7 @@ export default {
                                         element.category_count=element.category_count+r.category_count
                                         element.categories= element.categories+ r.categories
                                         r.log_sources.forEach(logS => {
-                                            element.log_sources = element.log_sources.filter(function(car) {
-                                                return car.type_name !== 'EventCRE';
-                                            });
+                                            
                                             element.log_sources = element.log_sources+ logS.name
                                         })
                                     })

@@ -114,7 +114,7 @@ export default {
             .get(`/api/get-assets`)
             .then(response => {
                //this.regla_136124=response.data;
-               //console.log(response.data);
+               console.log(response.data);
                this.AssetsItems=response.data;
                     //console.log(this.AssetsItems);
                   this.AssetsItems.forEach(element => {

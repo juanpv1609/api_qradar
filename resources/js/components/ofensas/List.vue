@@ -127,12 +127,12 @@
                                                  <!-- <td>{{row.item.categories}}</td> -->
                                                  <td>
                                                      <div v-for="cat in row.item.categories" v-bind:key="cat">
-                                                         <v-chip x-small class="ma-1" color="primary">{{cat}}</v-chip>
+                                                         <v-chip small class="ma-1" color="primary">{{cat}}</v-chip>
                                                          </div>
                                                          </td>
                                                          <td>
                                                      <div v-for="log in row.item.log_sources" v-bind:key="log.id">
-                                                         <v-chip x-small class="ma-1">{{log.name}}</v-chip>
+                                                         <v-chip small class="ma-1">{{log.name}}</v-chip>
                                                          </div>
                                                          </td>
                                                 <td>{{row.item.event_count}}</td>
@@ -243,8 +243,8 @@ export default {
                                         element.categories= element.categories+ r.categories
                                         element.log_sources= element.log_sources+r.log_sources.length;
                                         element.destination_networks= element.destination_networks+ r.destination_networks;
-                                        element.start_time=moment(element.start_time).format("DD/MM/YYYY hh:mm");
-                                        element.last_persisted_time=moment(element.last_persisted_time).format("DD/MM/YYYY hh:mm");
+                                        element.start_time=(element.start_time);
+                                        element.last_persisted_time=(element.last_persisted_time);
 
                                         element.elementos.push(r);
 
@@ -277,7 +277,7 @@ export default {
         this.objeto.start_time=moment(el.start_time).format("DD/MM/YYYY hh:mm");
         this.objeto.last_persisted_time=moment(el.last_persisted_time).format("DD/MM/YYYY hh:mm");
         this.objetos=el.elementos
-        
+
 
         this.chartObjeto.series.push({name:'Eventos',data:[(el.event_count)]})
         this.chartObjeto.series.push({name:'Ofensas',data:[(el.ofensas_count)]})

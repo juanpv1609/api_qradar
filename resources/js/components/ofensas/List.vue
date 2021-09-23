@@ -61,13 +61,10 @@
                     <v-card-text>
                             <v-row dense>
                                 <v-col  cols="3" dense>
-                                <v-hover v-slot="{ hover }">
                                     <v-card
                                     class="mx-auto"
                                     max-width="344"
                                     shaped
-                                    :elevation="hover ? 12 : 2"
-                                :class="{ 'on-hover': hover }"
 
                                 >
                                     <v-list-item
@@ -82,16 +79,12 @@
                                         </v-list-item-content>
                                     </v-list-item>
                                 </v-card>
-                                </v-hover>
                                 </v-col>
                                 <v-col  cols="3" dense>
-                                <v-hover v-slot="{ hover }">
                                     <v-card
                                     class="mx-auto"
                                     max-width="344"
                                     shaped
-                                    :elevation="hover ? 12 : 2"
-                                :class="{ 'on-hover': hover }"
 
                                 >
                                     <v-list-item
@@ -106,16 +99,12 @@
                                         </v-list-item-content>
                                     </v-list-item>
                                 </v-card>
-                                </v-hover>
                                 </v-col>
                                 <v-col  cols="3" dense>
-                                <v-hover v-slot="{ hover }">
                                     <v-card
                                     class="mx-auto"
                                     max-width="344"
                                     shaped
-                                    :elevation="hover ? 12 : 2"
-                                :class="{ 'on-hover': hover }"
 
                                 >
                                     <v-list-item
@@ -130,7 +119,6 @@
                                         </v-list-item-content>
                                     </v-list-item>
                                 </v-card>
-                                </v-hover>
                                 </v-col>
 
                             </v-row>

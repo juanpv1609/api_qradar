@@ -361,9 +361,9 @@ export default {
                       suma=parseFloat(suma)+parseFloat(el.data);
                       el.data=suma;
                       console.log(suma);
-                     //const { name, data } = el;
-                    const name=el.name;
-                    const data=el.data;
+                    const { name, data } = el;
+                    //const name=el.name;
+                    //const data=el.data;
                      filteredLogSource.push({ name, data });
                   }
                });

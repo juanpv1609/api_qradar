@@ -355,10 +355,10 @@ export default {
                });
                //console.log(aux);
                   const filteredLogSource= [];
-                var suma =0;
+                var suma = 0.0;
                aux.series.forEach(el => {
                   if (!filteredLogSource.find(log => log.name == el.name )) {
-                      suma=suma+el.data;
+                      suma=parseFloat(suma)+parseFloat(el.data);
                       el.data=suma;
                       console.log(suma);
                      //const { name, data } = el;

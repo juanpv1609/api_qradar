@@ -90,10 +90,10 @@ export default {
   mounted() {
       //this.getData();
 
+      this.getData();
   },
   created() {
 
-      this.getData();
     // this.creaChart();
 
   },

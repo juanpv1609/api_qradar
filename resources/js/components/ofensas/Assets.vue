@@ -93,17 +93,19 @@ export default {
   },
   created() {
 
-      this.assets();
+      this.getData();
     // this.creaChart();
 
   },
   methods:{
-
-      assets() {
+      async getData(){
+        await this.assets()
+     },
+      async assets() {
         this.loading=true;
          //this.axios.defaults.headers= '';
          console.log('eeeeee');
-         this.axios
+         await this.axios
             .get(`/api/get-assets`)
             .then(response => {
                //this.regla_136124=response.data;

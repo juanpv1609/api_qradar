@@ -358,12 +358,12 @@ export default {
                 var suma = 0.0;
                aux.series.forEach(el => {
                   if (!filteredLogSource.find(log => log.name == el.name )) {
-                      suma=parseFloat(suma)+parseFloat(el.data);
-                      el.data=suma;
+                      log.data=parseFloat(log.data)+parseFloat(el.data);
+                      //el.data=suma;
                       console.log(suma);
-                    const { name, data } = el;
-                    //const name=el.name;
-                    //const data=el.data;
+                    //const { name, data } = el;
+                    const name=el.name;
+                    const data=log.data;
                      filteredLogSource.push({ name, data });
                   }
                });

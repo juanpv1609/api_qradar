@@ -338,13 +338,14 @@ export default {
             .then(response => {
                //this.regla_136124=response.data;
 
-               //console.log(response.data);
+               console.log(response.data);
                var aux = {  series:[]  };
                response.data.forEach(element => {
                   //var temp = [];
                   element.log_sources = element.log_sources.filter(function(car) {
                         return car.type_name !== 'EventCRE';
                     });
+
                   for (let index = 0; index < element.log_sources.length; index++) {
 
 
@@ -354,10 +355,11 @@ export default {
                });
                //console.log(aux);
                   const filteredLogSource= [];
-                //var sum=[];
+                var suma =0;
                aux.series.forEach(el => {
                   if (!filteredLogSource.find(log => log.name == el.name )) {
-
+                      suma=suma+el.data;
+                      el.data=suma;
                      const { name, data } = el;
                      filteredLogSource.push({ name, data });
                   }

@@ -360,7 +360,10 @@ export default {
                   if (!filteredLogSource.find(log => log.name == el.name )) {
                       suma=suma+el.data;
                       el.data=suma;
-                     const { name, data } = el;
+                      console.log(suma);
+                     //const { name, data } = el;
+                    const name=el.name;
+                    const data=el.data;
                      filteredLogSource.push({ name, data });
                   }
                });

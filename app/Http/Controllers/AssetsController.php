@@ -24,6 +24,6 @@ class AssetsController extends Controller
                 ->get($host.'asset_model/assets?fields=hostnames,interfaces,properties,users&filter=domain_id='.$user->company->domain);
 
 
-        return ($response);
+        dd($response);
     }
 }

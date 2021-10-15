@@ -113,7 +113,13 @@
             </v-card-text>
          </v-card>
        </v-col>
-
+<v-col v-show="chartOptionsMITRE.series.length>0" cols="12" sm="6">
+          <v-card>
+            <v-card-text>
+                  <highcharts :options="chartOptionsMITRE" ></highcharts>
+            </v-card-text>
+         </v-card>
+       </v-col>
     </v-row>
    <!--  <v-row>
        <v-col cols="12" sm="6">
@@ -229,6 +235,23 @@ export default {
             xAxis:{
                 categories:['IP Address']
             }
+         },
+         chartOptionsMITRE: {
+            chart: {
+               type: 'bar'
+            },
+            title: {
+               text: 'MITRE rule mappings per tactic'
+            },
+            series: [ ],
+            /* yAxis:{
+               title:{
+                  text:'Rules'
+               }
+            },
+            xAxis:{
+                categories:['IP Address']
+            } */
          },
          chartOptionsTopDestinationAddress: {
              exporting: {
@@ -438,6 +461,26 @@ export default {
                this.LocalDestinationItems.forEach(element => {
                   element.last_event_flow_seen=moment(element.last_event_flow_seen).format("DD/MM/YYYY hh:mm")
                   this.chartOptionsTopDestinationAddress.series.push({name:element.local_destination_ip,data:[element.event_flow_count]})
+                  //this.chartOptionsMostRecentOffense.series.push({name:element.description,data:[moment(element.start_time).format("DD/MM/YYYY hh:mm")]})
+               });
+            }).catch(err => console.log(err))
+            .finally(() => {
+               this.loading=false;
+
+
+            });
+
+     },
+     async mitre() {
+        this.loading=true;
+         //this.axios.defaults.headers.common['Range'] = 'items=0-9';
+
+        await this.axios
+            //.get(`siem/local_destination_addresses?filter=domain_id=9`,this.configHeaders)
+            .get(`/api/mitre-tactic`)
+            .then(response => {
+               response.data.forEach(element => {
+                  this.chartOptionsMITRE.series.push({name:element.tactics,data:[element.count]})
                   //this.chartOptionsMostRecentOffense.series.push({name:element.description,data:[moment(element.start_time).format("DD/MM/YYYY hh:mm")]})
                });
             }).catch(err => console.log(err))

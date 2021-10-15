@@ -75,7 +75,20 @@ class OfensesController extends Controller
 
 
     }
+public function mitreTactic(){
+        $user = User::with('company', 'rol')->where('id', auth()->user()->id)->First();
 
+        $host = env("API_QRADAR");
+        $response = Http::withHeaders([
+            'Range' => 'items=0-9',
+                ])->withOptions(['verify' => false])->withBasicAuth($user->username, Crypt::decryptString($user->password))->accept('application/json')
+                ->get('https://10.1.11.61/console/plugins/app_proxy:UseCaseManager_Service/api/mappings/numbers_by_tactic');
+
+
+        return ($response);
+
+
+    }
     public function offensesRule($qid){
         $user = User::with('company', 'rol')->where('id', auth()->user()->id)->First();
 

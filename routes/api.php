@@ -61,8 +61,13 @@ Route::middleware('api')->group(function () {
     //Route::get('busqueda/{qid}', [OfensesController::class,'busqueda']);
     Route::get('busqueda', [OfensesController::class,'busqueda']);
 
+
     Route::post('hacia-ip-maliciosa', [OfensesController::class,'haciaIPMAliciosas']);
+    Route::post('mitre-tactic', [OfensesController::class,'mitreTactic']);
+
+
     Route::get('get-assets', [AssetsController::class,'getAssets']);
+
 
 
 

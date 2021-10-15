@@ -324,6 +324,7 @@ export default {
         await this.topLogSourceEvents();
         await this.sourceAddress();
         await this.localDestination();
+        await this.mitre();
         //await this.mostRecentOffenses();
         //wait this.creaChart();
      },

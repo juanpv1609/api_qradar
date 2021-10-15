@@ -480,10 +480,10 @@ export default {
             //.get(`siem/local_destination_addresses?filter=domain_id=9`,this.configHeaders)
             .get(`/api/mitre-tactic`)
             .then(response => {
-               response.data.forEach(element => {
-                  this.chartOptionsMITRE.series.push({name:element.tactics,data:[element.count]})
-                  //this.chartOptionsMostRecentOffense.series.push({name:element.description,data:[moment(element.start_time).format("DD/MM/YYYY hh:mm")]})
-               });
+                console.log(response.data);
+            //    response.data.forEach(element => {
+            //       this.chartOptionsMITRE.series.push({name:element.tactics,data:[element.count]})
+            //    });
             }).catch(err => console.log(err))
             .finally(() => {
                this.loading=false;
